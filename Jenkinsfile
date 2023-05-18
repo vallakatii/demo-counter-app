@@ -85,7 +85,7 @@ pipeline{
                 
                script{
                    
-                    sh 'docker image build tag $JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image build -t /app $JOB_NAME:v1.$BUILD_ID'
                    
                     sh 'docker image tag $JOB_NAME:v1.$BUILD_ID sreekanthvallakati/$JOB_NAME:v1.$BUILD_ID'
                    
