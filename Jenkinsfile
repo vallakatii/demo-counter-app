@@ -85,11 +85,9 @@ pipeline{
                 
                script{
                    
-                    sh 'docker image build -t  $JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image build -t sreekanthvallakati .'
                    
-                    sh 'docker image -t $JOB_NAME:v1.$BUILD_ID sreekanthvallakati'
-                   
-                    sh 'docker image -t $JOB_NAME:v1.$BUILD_ID sreekanthvallakati'
+                    
                  }  
    
              }
