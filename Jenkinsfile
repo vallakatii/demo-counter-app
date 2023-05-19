@@ -94,6 +94,20 @@ pipeline{
    
              }
         }
+        
+         stage('pushing image to the dockerhub'){
+           
+           steps{
+               script{
+                   withCredentials([string(credentialsId: 'docker_hub_cred', variable: 'docker_hub_cred')]) {
+                    
+                      sh 'docker login -u sreekanthvallakati -p ${docker_hub_cred}'
+                      sh 'docker image push sreekanthvallakati/$JOB_NAME:v1.$BUILD_ID'
+                      sh 'docker image push sreekanthvallakati/$JOB_NAME:latest'
+                   }
+               }
+           }
+       }
       
             
     }    
