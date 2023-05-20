@@ -2,6 +2,10 @@ pipeline{
     
     agent any 
     
+    environment {
+	    DOCKER_REGISTRY="591133068176.dkr.ecr.ap-southeast-1.amazonaws.com"
+    }
+    
     stages {
         
         stage('Git Checkout'){
