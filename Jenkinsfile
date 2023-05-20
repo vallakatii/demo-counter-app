@@ -3,7 +3,11 @@ pipeline{
     agent any 
     
     environment {
-	    DOCKER_REGISTRY="591133068176.dkr.ecr.ap-south-1.amazonaws.com"
+	    DOCKER_REGISTRY="591133068176.dkr.ecr.ap-south-1.amazonaws.com/demo_application"
+	    aws configure set aws_access_key_id $AWS_ACCESS_KEY
+	    aws configure set aws_secret_access_key $AWS_SECRET_KEY
+            aws configure set default.region ap-south-1
+	    
     }
     
     stages {
@@ -118,22 +122,16 @@ pipeline{
             steps{
                 
                script{
-                   
-                    sh '''
-	            whoami
-                    aws configure set aws_access_key_id $AWS_ACCESS_KEY
-	            aws configure set aws_secret_access_key $AWS_SECRET_KEY
-                    aws configure set default.region ap-south-1
       
-                    aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 591133068176.dkr.ecr.ap-south-1.amazonaws.com.amazonaws.com
-	            docker build -t 591133068176.dkr.ecr.ap-south-1.amazonaws.com/demo_application:SAMPLE-PROJECT-${BUILD_NUMBER} .
-                    docker push 591133068176.dkr.ecr.ap-south-1.amazonaws.com/demo_application:SAMPLE-PROJECT-${BUILD_NUMBER}
-	                '''
+                    sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 591133068176.dkr.ecr.ap-south-1.amazonaws.com.amazonaws.com'
+	            sh 'docker build -t 591133068176.dkr.ecr.ap-south-1.amazonaws.com/demo_application:SAMPLE-PROJECT-${BUILD_NUMBER} .'
+                    sh 'docker push 591133068176.dkr.ecr.ap-south-1.amazonaws.com/demo_application:SAMPLE-PROJECT-${BUILD_NUMBER}'
+	                
                     
-               }    
+	       } 
                    
         
-            }
+            }  
         }
              
     }         
