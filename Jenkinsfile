@@ -6,7 +6,7 @@ pipeline{
 	    DOCKER_REGISTRY="591133068176.dkr.ecr.ap-south-1.amazonaws.com/demo_application"
 	    aws configure set aws_access_key_id $AWS_ACCESS_KEY
 	    aws configure set aws_secret_access_key $AWS_SECRET_KEY
-            aws configure set default.region ap-south-1
+            aws configure set region ap-south-1
 	    
     }
     
